@@ -11,7 +11,8 @@ let dbPass = 'm3s121n2';
 let dbName = 'omnistack';
 mongoose.connect(`mongodb+srv://${dbUser}:${dbPass}@cluster0-waivm.mongodb.net/${dbName}?retryWrites=true&w=majority`, {
     useUnifiedTopology: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false
 })
 
 //app.use(cors({ origin: 'http://localhost:3000' }));

@@ -25,6 +25,11 @@ function App() {
     setDevs([...devs, response.data]);
   }
 
+  async function handleRmvDev(dev) {
+    const response = await api.delete('/devs', { data: { github_username : dev.github_username } });
+    setDevs(devs.filter( e => e._id != response.data._id ));
+}
+
   return (
     <div id="app">
       <aside>
@@ -35,7 +40,7 @@ function App() {
         <ul>
           
         {devs.map(dev => (
-            <DevItem key={dev._id} dev={dev} />
+            <DevItem key={dev._id} dev={dev} rmvDev={handleRmvDev} />
           ))}
 
         </ul>

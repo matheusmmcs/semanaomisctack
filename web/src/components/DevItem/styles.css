@@ -19,6 +19,22 @@ li.dev-item header img {
 
 li.dev-item header .user-info {
     margin-left: 10px;
+    text-align: left;
+    flex: 1;
+}
+
+li.dev-item header .dev-remove {
+    background: #d82121;
+    padding: 5px;
+    border-radius: 2px;
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.5s;
+    cursor: pointer;
+}
+li.dev-item header .dev-remove:hover {
+    background: #b10c0c;
+    color: #fff;
 }
 
 .user-info strong {

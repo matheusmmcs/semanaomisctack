@@ -10,11 +10,15 @@ module.exports = {
         return res.json(devs);
     },
 
+    async destroy(req, res) {
+        const { github_username } = req.body;
+        const devs = await Dev.findOneAndRemove({ github_username });
+        return res.json(devs);
+    },
+
     async store(req, res) {
         const { github_username, techs, longitude, latitude } = req.body;
-
         let dev = await Dev.findOne({ github_username });
-
         if (!dev) {
             const apiResp = await axios.get(`https://api.github.com/users/${github_username}`);
             const { name = login, avatar_url, bio } = apiResp.data;
@@ -32,7 +36,6 @@ module.exports = {
                 location
             })
         }
-    
         return res.json(dev);
     }
 };
