@@ -7,7 +7,6 @@ function DevItem({ dev, rmvDev }) {
     async function handleRmvDev(e, dev) {
         e.preventDefault();
         await rmvDev(dev);
-        console.log(123, dev)
     }
 
     return(
