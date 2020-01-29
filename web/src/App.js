@@ -3,8 +3,6 @@ import api from './services/api';
 
 import './global.css';
 import './App.css';
-import './Sidebar.css';
-import './Main.css';
 
 import DevItem from './components/DevItem';
 import DevForm from './components/DevForm';
@@ -38,11 +36,9 @@ function App() {
       </aside>
       <main>
         <ul>
-          
-        {devs.map(dev => (
-            <DevItem key={dev._id} dev={dev} rmvDev={handleRmvDev} />
-          ))}
-
+          {devs.map(dev => (
+              <DevItem key={dev._id} dev={dev} rmvDev={handleRmvDev} />
+            ))}
         </ul>
       </main>
     </div>
