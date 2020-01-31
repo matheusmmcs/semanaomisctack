@@ -21,9 +21,8 @@ module.exports = {
         let dev = await Dev.findOne({ github_username });
         if (!dev) {
             const apiResp = await axios.get(`https://api.github.com/users/${github_username}`);
-            /*global login*/
-            /*eslint no-undef: "error"*/
-            let { name = login, avatar_url, bio } = apiResp.data;
+            let { name, login, avatar_url, bio } = apiResp.data;
+            if (!name) { name = login }
             const techsArray = parseStringAsArray(techs);
             const location = {
                 type: 'Point',

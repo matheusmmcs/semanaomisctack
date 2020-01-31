@@ -4,11 +4,13 @@ import MapView, { Marker, Callout } from 'react-native-maps';
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import axios from 'axios';
 import api from '../services/api';
 
 function Main({ navigation }) {
     const [devs, setDevs] = useState([]);
     const [currentRegion, setCurrentRegion] = useState(null);
+    const [techs, setTechs] = useState('');
     const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
     useEffect(() => {
@@ -47,16 +49,14 @@ function Main({ navigation }) {
     }, []);
 
     async function loadDevs() {
-        console.log('init loadDevs')
         const { latitude, longitude } = currentRegion;
         const response = await api.get('/search', {
             params: {
                 latitude,
                 longitude,
-                techs: 'ReactJS'
+                techs
             }
         });
-        console.log(response.data);
         setDevs(response.data);
     }
 
@@ -81,7 +81,7 @@ function Main({ navigation }) {
                     }}>
                         <View style={ styles.callout }>
                             <Text style={ styles.devName }>{dev.name}</Text>
-                            <Text style={ styles.devBio }>{dev.bio}}</Text>
+                            <Text style={ styles.devBio }>{dev.bio}</Text>
                             <Text style={ styles.devTechs }>{dev.techs.join(', ')}</Text>
                         </View>
                     </Callout>
@@ -95,6 +95,8 @@ function Main({ navigation }) {
                 placeholderTextColor="#999"
                 autoCapitalize="words"
                 autoCorrect={false}
+                value={techs}
+                onChangeText={setTechs}
                 />
             <TouchableOpacity onPress={ loadDevs } style={ styles.loadButton }>
                 <MaterialIcons name="my-location" size={20} color="#FFF" />
